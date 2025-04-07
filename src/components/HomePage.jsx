@@ -1,12 +1,13 @@
 import React from 'react';
+import { Container, Typography } from '@mui/material';
 import PasswordStrengthChecker from './PasswordStrengthChecker';
+import PasswordGenerator from './PasswordGenerator'; // Assuming this component exists
 import SmsSpamCheck from './SmsSpamCheck';
 import URLScanner from './URLScanner';
 import PhoneNumberValidation from './PhoneNumberValidation';
 import FileMaliciousChecker from './FileMaliciousChecker';
 import PanicSection from './PanicSection';
-import EducationSection from './EducationSection';
-import { Container, Typography } from '@mui/material';
+import Awareness from '../pages/Awareness'; // Updated import
 
 const HomePage = () => {
   return (
@@ -15,12 +16,13 @@ const HomePage = () => {
         Guardian-One Dashboard
       </Typography>
       <PasswordStrengthChecker />
+      <PasswordGenerator />
       <SmsSpamCheck />
       <URLScanner />
       <PhoneNumberValidation />
       <FileMaliciousChecker />
       <PanicSection />
-      <EducationSection />
+      <Awareness /> {/* Updated component usage */}
     </Container>
   );
 };
