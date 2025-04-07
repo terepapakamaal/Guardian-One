@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PasswordStrengthChecker from './PasswordStrengthChecker'; // Assuming this component exists
+import { Button, Typography, Container } from '@mui/material';
 
 const LandingPage = () => {
   return (
-    <div className="landing-page">
-      <h1>Welcome to Guardian-One</h1>
-      <p>Your all-in-one solution for digital safety.</p>
-      <div className="buttons">
-        <Link to="/auth?type=login" className="btn">Login</Link>
-        <Link to="/auth?type=signup" className="btn">Sign Up</Link>
-      </div>
-      <div className="password-checker">
-        <h2>Check Your Password Strength</h2>
-        <PasswordStrengthChecker />
-      </div>
-    </div>
+    <Container>
+      <Typography variant="h2" gutterBottom>
+        Welcome to Guardian-One
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        Your all-in-one solution for digital safety.
+      </Typography>
+      <Button variant="contained" color="primary" component={Link} to="/auth?type=login">
+        Login
+      </Button>
+      <Button variant="contained" color="secondary" component={Link} to="/auth?type=signup">
+        Sign Up
+      </Button>
+    </Container>
   );
 };
 
