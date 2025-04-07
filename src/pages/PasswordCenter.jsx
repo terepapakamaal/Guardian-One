@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { db } from '../config/firebase';
-import PasswordMeter from '../components/PasswordMeter'; // Import PasswordMeter
+import PasswordMeter from '../components/PasswordStrengthChecker'; // Import PasswordMeter
 
 export default function PasswordCenter() {
   const [password, setPassword] = useState('');
