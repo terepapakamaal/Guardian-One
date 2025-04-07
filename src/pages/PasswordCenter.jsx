@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
-import Typography from '@mui/material/Typography';
 import { db } from '../config/firebase';
 import PasswordMeter from '../components/PasswordMeter'; // Import PasswordMeter
 
