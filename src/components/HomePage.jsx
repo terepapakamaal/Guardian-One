@@ -1,16 +1,19 @@
 import React from 'react';
-import PasswordStrengthChecker from './PasswordStrengthChecker'; // Assuming this component exists
-import SmsSpamCheck from './SmsSpamCheck'; // Assuming this component exists
-import URLScanner from './URLScanner'; // Assuming this component exists
-import PhoneNumberValidation from './PhoneNumberValidation'; // Assuming this component exists
-import FileMaliciousChecker from './FileMaliciousChecker'; // Assuming this component exists
-import PanicSection from './PanicSection'; // Assuming this component exists
-import EducationSection from './EducationSection'; // Assuming this component exists
+import PasswordStrengthChecker from './PasswordStrengthChecker';
+import SmsSpamCheck from './SmsSpamCheck';
+import URLScanner from './URLScanner';
+import PhoneNumberValidation from './PhoneNumberValidation';
+import FileMaliciousChecker from './FileMaliciousChecker';
+import PanicSection from './PanicSection';
+import EducationSection from './EducationSection';
+import { Container, Typography } from '@mui/material';
 
 const HomePage = () => {
   return (
-    <div className="home-page">
-      <h1>Guardian-One Dashboard</h1>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Guardian-One Dashboard
+      </Typography>
       <PasswordStrengthChecker />
       <SmsSpamCheck />
       <URLScanner />
@@ -18,7 +21,7 @@ const HomePage = () => {
       <FileMaliciousChecker />
       <PanicSection />
       <EducationSection />
-    </div>
+    </Container>
   );
 };
 
