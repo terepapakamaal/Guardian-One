@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GOOGLE_SAFE_BROWSING_API = 'https://safebrowsing.googleapis.com/v4/threatMatches:find';
-const API_KEY = 'YOUR_GOOGLE_API_KEY'; // Replace with your Google API Key
+const API_KEY = 'AIzaSyB7FssDf1KpaSTteYgwZ-gCW-8UhE4fESE'; // Replace with your Google API Key
 
 export const scanUrl = async (url) => {
   try {
