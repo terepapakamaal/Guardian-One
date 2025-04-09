@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
-import PasswordMeter from '../components/PasswordStrengthChecker'; // Import PasswordMeter
+import PasswordStrenghtChecker from '../components/PasswordStrengthChecker'; // Import PasswordMeter
 
 export default function PasswordCenter() {
   const [password, setPassword] = useState('');
