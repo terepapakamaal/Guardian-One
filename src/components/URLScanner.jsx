@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Container } from '@mui/material';
+import { Container, Typography, TextField, Button, Box } from '@mui/material';
+import { scanUrl } from '../utils/urlScanner';
 
-const URLScanner = () => {
+const UrlScannerPage = () => {
   const [url, setUrl] = useState('');
   const [result, setResult] = useState('');
 
-  const checkURL = () => {
-    const isValid = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*$/i.test(url);
-    setResult(isValid ? 'URL looks valid.' : 'URL might be malicious or invalid.');
+  const handleScan = async () => {
+    try {
+      const scanResult = await scanUrl(url);
+      setResult(scanResult);
+    } catch (error) {
+      setResult('Error scanning URL.');
+    }
   };
 
   return (
@@ -15,16 +20,18 @@ const URLScanner = () => {
       <Typography variant="h4" gutterBottom>
         URL Scanner
       </Typography>
-      <TextField
-        label="Enter URL"
-        fullWidth
-        margin="normal"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <Button variant="contained" color="primary" onClick={checkURL}>
-        Check URL
-      </Button>
+      <Box>
+        <TextField
+          label="Enter URL"
+          fullWidth
+          margin="normal"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <Button variant="contained" color="primary" onClick={handleScan}>
+          Scan URL
+        </Button>
+      </Box>
       {result && (
         <Typography variant="body1" gutterBottom>
           {result}
@@ -34,5 +41,4 @@ const URLScanner = () => {
   );
 };
 
-export default URLScanner;
-
+export default UrlScannerPage;
