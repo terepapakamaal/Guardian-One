@@ -54,7 +54,7 @@ const Auth = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button variant="contained" color="primary" onClick={handleAuth}>
+        <Button variant="contained" color="primary" onClick={handleAuth} style={{ marginRight: '10px' }}>
           {isLogin ? 'Login' : 'Sign Up'}
         </Button>
         <Button variant="contained" color="secondary" onClick={handleGoogleSignIn}>
