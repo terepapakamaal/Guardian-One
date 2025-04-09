@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { db } from '../config/firebase';
-import PasswordMeter from '../components/PasswordStrengthChecker'; // Import PasswordMeter
+import PasswordStrengthChecker from '../components/PasswordStrengthChecker'; 
 
 export default function PasswordCenter() {
   const [password, setPassword] = useState('');
@@ -32,7 +32,7 @@ export default function PasswordCenter() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <PasswordMeter password={password} /> {/* Add PasswordMeter here */}
+      <PasswordMeter password={password} /> {}
       <Button variant="contained" onClick={handleBreachCheck} sx={{ mt: 2 }}>
         Check Breach
       </Button>
