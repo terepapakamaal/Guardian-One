@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Container, Typography, Paper, Box, Button, CircularProgress, Alert, Input, LinearProgress } from '@mui/material';
+import { Container, Typography, Paper, Box, Button, CircularProgress, Alert, Input, LinearProgress } from '@mui/material'; // Input is now used
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import axios from 'axios';
 
@@ -8,17 +8,16 @@ const FileCheckerPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [result, setResult] = useState({ status: 'info', message: 'Select a file (up to 32MB) to scan for malicious content.' });
-    const fileInputRef = useRef(); // To programmatically clear the input
+    const fileInputRef = useRef(); // Still useful for clearing
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            // Optional: Check file size limit (VirusTotal free tier has limits, e.g., 32MB for direct uploads)
             const maxSize = 32 * 1024 * 1024; // 32 MB
             if (file.size > maxSize) {
                 setResult({ status: 'error', message: `File is too large. Maximum size is 32MB.` });
                 setSelectedFile(null);
-                if(fileInputRef.current) fileInputRef.current.value = ""; // Clear input
+                if (fileInputRef.current) fileInputRef.current.value = ""; // Clear input
                 return;
             }
             setSelectedFile(file);
@@ -36,14 +35,13 @@ const FileCheckerPage = () => {
         }
 
         setIsLoading(true);
-        setUploadProgress(0); // Reset progress
+        setUploadProgress(0);
         setResult({ status: 'info', message: `Uploading and scanning ${selectedFile.name}...` });
 
         const formData = new FormData();
-        formData.append('file', selectedFile); // The key 'file' must match what your Netlify function expects
+        formData.append('file', selectedFile);
 
         try {
-            // Call your Netlify serverless function endpoint
             const response = await axios.post('/.netlify/functions/scanFile', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -54,34 +52,28 @@ const FileCheckerPage = () => {
                 }
             });
 
-            // Assuming your Netlify function returns a response like:
-            // { status: 'clean' | 'malicious' | 'pending' | 'error', message: 'Scan results...' }
-            // Map the status to MUI Alert severity ('clean' -> 'success', 'malicious' -> 'error', 'pending' -> 'info', 'error' -> 'error')
             let severity = 'info';
             if (response.data.status === 'clean') severity = 'success';
             else if (response.data.status === 'malicious') severity = 'error';
             else if (response.data.status === 'error') severity = 'error';
 
-             setResult({
+            setResult({
                 status: severity,
                 message: response.data.message || 'Scan complete. Check results.'
-             });
+            });
 
         } catch (error) {
             console.error("Error scanning file:", error);
-             let errorMessage = 'Failed to scan file. The service might be unavailable or there was an upload error.';
-             if (error.response && error.response.data && error.response.data.message) {
-                 errorMessage = `Error: ${error.response.data.message}`;
-             } else if (error.message) {
-                  errorMessage = `Network or request error: ${error.message}`;
-             }
+            let errorMessage = 'Failed to scan file. The service might be unavailable or there was an upload error.';
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = `Error: ${error.response.data.message}`;
+            } else if (error.message) {
+                 errorMessage = `Network or request error: ${error.message}`;
+            }
             setResult({ status: 'error', message: errorMessage });
         } finally {
             setIsLoading(false);
-            setUploadProgress(0); // Hide progress bar after completion/error
-             // Optionally clear the selection after check
-             // setSelectedFile(null);
-             // if(fileInputRef.current) fileInputRef.current.value = "";
+            setUploadProgress(0);
         }
     };
 
@@ -95,20 +87,35 @@ const FileCheckerPage = () => {
                     Upload a file to check it against VirusTotal's database for known viruses, worms, trojans, and other malware. Limited to 32MB per file.
                 </Typography>
                 <Box sx={{ mt: 3, textAlign: 'center' }}>
-                     <Button
+                    {/* Button still acts as the label */}
+                    <Button
                         variant="outlined"
-                        component="label" // Makes the button act like a label for the hidden input
+                        component="label" // Makes the button act like a label
                         startIcon={<UploadFileIcon />}
                         disabled={isLoading}
                         sx={{ mb: 2 }}
                     >
                         Select File
-                        <input
+                        {/* Use the MUI Input component, styled to be hidden */}
+                        <Input
                             type="file"
-                            hidden // Hide the default browser input
                             onChange={handleFileChange}
-                            ref={fileInputRef} // Add ref here
-                            />
+                            // Use inputRef for passing ref to MUI component's underlying input
+                            inputRef={fileInputRef}
+                            // Add styling to visually hide the Input component itself
+                            // This is a common technique for accessible hiding
+                            sx={{
+                                clip: 'rect(0 0 0 0)',
+                                clipPath: 'inset(50%)',
+                                height: 1,
+                                overflow: 'hidden',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                whiteSpace: 'nowrap',
+                                width: 1,
+                            }}
+                        />
                     </Button>
 
                     {selectedFile && !isLoading && (
@@ -118,7 +125,7 @@ const FileCheckerPage = () => {
                     {isLoading && (
                          <Box sx={{ width: '100%', mb: 2 }}>
                              <LinearProgress variant="determinate" value={uploadProgress} />
-                              <Typography variant="body2" color="textSecondary">{`Uploading: ${uploadProgress}%`}</Typography>
+                             <Typography variant="body2" color="textSecondary">{`Uploading: ${uploadProgress}%`}</Typography>
                          </Box>
                      )}
 
