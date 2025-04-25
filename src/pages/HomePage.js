@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ShieldIcon from '@mui/icons-material/Shield';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
-import DescriptionIcon from '@mui/icons-material/Description';
+/* import DescriptionIcon from '@mui/icons-material/Description'; */
 import LockIcon from '@mui/icons-material/Lock';
 import SchoolIcon from '@mui/icons-material/School';
 import EmailIcon from '@mui/icons-material/Email';
