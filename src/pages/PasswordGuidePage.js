@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material'; // Added Box, Alert for better layout/feedback
+import { Container, TextField, Button, Typography, Box, Alert, Paper } from '@mui/material'; // Added Box, Alert for better layout/feedback
 // Removed axios as it's no longer needed
 
 const PasswordChecker = () => { // Renaming component if this replaces PasswordGuidePage
