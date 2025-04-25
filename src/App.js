@@ -1,31 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './theme'; // Import your custom theme
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import SmsCheckerPage from './pages/SmsCheckerPage';
+import PhoneCheckerPage from './pages/PhoneCheckerPage';
+import UrlCheckerPage from './pages/UrlCheckerPage';
+import FileCheckerPage from './pages/FileCheckerPage';
+import PasswordGuidePage from './pages/PasswordGuidePage';
+import EducationPage from './pages/EducationPage';
 import './App.css';
-import ResponsiveAppBar from './components/Navbar'; // Corrected import for Navbar
-import BottomNav from './components/BottomNav';
-import HomePage from './components/HomePage';
-import LandingPage from './components/LandingPage';
-import Awareness from './pages/Awareness';
-import SmsSpamCheck from './components/SmsSpamCheck';
-import UrlScannerPage from './components/UrlScannerPage'; // Corrected import for URLScanner
-import PasswordCenter from './pages/PasswordCenter';
-import Auth from './pages/Auth';
 
 function App() {
   return (
-    <Router>
-      <ResponsiveAppBar /> {/* Updated component name */}
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/awareness" element={<Awareness />} />
-        <Route path="/spam" element={<SmsSpamCheck />} />
-        <Route path="/url" element={<UrlScannerPage />} /> {/* Updated component name */}
-        <Route path="/password" element={<PasswordCenter />} />
-        <Route path="/auth" element={<Auth />} />
-      </Routes>
-      <BottomNav />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {/* Normalize CSS and apply background color */}
+      <Router>
+        <Layout> {/* Layout handles Navbar/BottomNav */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/sms-checker" element={<SmsCheckerPage />} />
+            <Route path="/phone-checker" element={<PhoneCheckerPage />} />
+            <Route path="/url-checker" element={<UrlCheckerPage />} />
+            <Route path="/file-checker" element={<FileCheckerPage />} />
+            <Route path="/password-guide" element={<PasswordGuidePage />} />
+            <Route path="/education" element={<EducationPage />} />
+            {/* Add other routes as needed */}
+            {/* No route for email-breach as it's an external link */}
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }
 
